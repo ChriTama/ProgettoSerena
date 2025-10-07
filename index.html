@@ -7,36 +7,408 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Stili precedenti... */
-        /* ... (mantieni gli stili esistenti) ... */
-        
-        /* Aggiungi questo nuovo stile */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #1a252f);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subtitle {
+            color: #bdc3c7;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: var(--transition);
+            border-radius: 6px;
+            margin: 0.3rem 0;
+            background-color: #fff;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .low-stock {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            background: #f0f4f8;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-decrease {
+            background-color: #e74c3c;
+            padding: 0.5rem;
+            width: 36px;
+            height: 36px;
+        }
+
+        .btn-increase {
+            background-color: #2ecc71;
+            padding: 0.5rem;
+            width: 36px;
+            height: 36px;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            padding: 0.5rem;
+            width: 36px;
+            height: 36px;
+        }
+
+        .btn-add {
+            background-color: var(--primary-color);
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .add-item-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 200px;
+            transition: var(--transition);
+            background-color: #f8f9fa;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background-color: #fff;
+        }
+
+        input[type="number"] {
+            max-width: 120px;
+            text-align: center;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+            color: var(--primary-color);
+        }
+
         .last-updated {
             text-align: center;
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 1rem;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #eee;
         }
-        
+
         .github-link {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: #333;
             color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
+            padding: 10px 20px 10px 15px;
+            border-radius: 30px;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
+        .github-link i {
+            font-size: 1.2rem;
+        }
+
         .github-link:hover {
             background: #444;
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Stili per la notifica */
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(120%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #notification.show {
+            transform: translateX(0);
+        }
+
+        #notification.success { 
+            background-color: #2ecc71; 
+            border-left: 4px solid #27ae60;
+        }
+        
+        #notification.error { 
+            background-color: #e74c3c;
+            border-left: 4px solid #c0392b;
+        }
+        
+        #notification.info { 
+            background-color: #3498db;
+            border-left: 4px solid #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .card {
+                padding: 1.2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .item-controls {
+                width: 100%;
+                justify-content: space-between;
+                border-top: 1px solid #f0f0f0;
+                padding-top: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .add-item-form {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            input[type="text"],
+            input[type="number"] {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .btn-add {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem;
+            }
+
+            .github-link {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.8rem;
+                padding: 8px 15px 8px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1.5rem 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -55,7 +427,7 @@
                 <!-- Gli articoli verranno inseriti qui dinamicamente -->
             </div>
             <div id="emptyState" class="empty-state" style="display: none;">
-                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <i class="fas fa-inbox"></i>
                 <p>Nessun articolo presente. Aggiungi il tuo primo articolo qui sotto!</p>
             </div>
             <div id="lastUpdated" class="last-updated"></div>
