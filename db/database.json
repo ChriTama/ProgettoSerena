@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "id": 1, "name": "Zaino", "quantity": 10 },
+    { "id": 2, "name": "Borsa", "quantity": 15 },
+    { "id": 3, "name": "Portadocumenti", "quantity": 20 },
+    { "id": 4, "name": "Pochette", "quantity": 12 }
+  ],
+  "lastUpdated": "2025-10-07T18:46:15+02:00"
+}
