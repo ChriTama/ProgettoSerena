@@ -1,13 +1,13 @@
 // Configurazione di base
 const CONFIG = {
     // Sostituisci con le tue informazioni
-    owner: 'tu-utente',        // Il tuo nome utente GitHub
-    repo: 'tuo-repo',          // Nome del repository
+    owner: 'ChriTama93',        // Il tuo nome utente GitHub
+    repo: 'ProgettoSerena',          // Nome del repository
     path: 'db/database.json',  // Percorso del file nel repository
     branch: 'main',            // Branch del repository
     // Token di accesso personale (da creare su GitHub)
     // Vedi: https://github.com/settings/tokens/new?scopes=repo
-    token: 'il-tuo-token-github'
+    token: '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'
 };
 
 // Stato dell'applicazione
